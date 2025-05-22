@@ -1,6 +1,8 @@
-<!DOCTYPE html><html lang="pt"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Verificação</title>
   <style>
     * {
@@ -22,15 +24,14 @@
       animation: fadeToRed 3s ease-in-out forwards;
     }
 
-    /* @keyframes fadeToRed {
+    @keyframes fadeToRed {
       0% {
         background: linear-gradient(to bottom right, #1a1a2e, #16213e);
       }
-
       100% {
         background: linear-gradient(to bottom right, #4a1a1a, #7a2525);
       }
-    } */
+    }
 
     .container {
       background: rgba(255, 255, 255, 0.1);
@@ -76,9 +77,9 @@
       transition: width 0.3s ease-in-out;
     }
 
-    .sucess-message {
-      background: rgba(0, 0, 0, 0,8);
-      border: 1px solid rgba(0, 0, 0, 0,8);
+    .success-message {
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
       color: #85f748;
       padding: 12px;
       border-radius: 8px;
@@ -90,26 +91,25 @@
       font-size: 16px;
       width: 100%;
       max-width: 400px;
-      animation: sucessMessage 0.5s ease-in-out;
+      animation: successMessage 0.5s ease-in-out;
     }
 
-    @keyframes sucessMessage {
+    @keyframes successMessage {
       0% {
         opacity: 0;
         transform: translateY(10px);
       }
-
       100% {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    .sucess-message span {
+    .success-message span {
       font-size: 22px;
     }
 
-    .sucess-text {
+    .success-text {
       display: none;
       margin-top: 10px;
       font-size: 14px;
@@ -157,62 +157,57 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Mensagem de erro -->
-  <div class="sucess-message" id="sucessMessage">
+  <!-- Mensagem de sucesso -->
+  <div class="success-message" id="successMessage">
     <span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="m15 9-6 6"></path>
-        <path d="m9 9 6 6"></path>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9 12l2 2 4-4" />
       </svg>
     </span>
     <div>
       <strong>Verificação Sucedida</strong>
-      <p style="font-size: 14px;">A verificar foi Sucedida na sua conta.</p>
+      <p style="font-size: 14px;">A verificação foi concluída com sucesso em sua conta.</p>
     </div>
   </div>
 
   <div class="container hidden" id="verificationContainer">
-    <img id="serverIcon" class="server-icon" src="images/logo.png" alt="Server Icon">
+    <img id="serverIcon" class="server-icon" src="images/logo.png" alt="Ícone do Servidor" aria-label="Logo do servidor" />
     <h2 id="statusText">Verificando...</h2>
-
-    <p id="sucessText" class="sucess-text"Verificação Sucedida</p>
-
+    <p id="successText" class="success-text">Verificação Sucedida</p>
     <p id="progressText">0%</p>
 
     <div class="progress-bar" id="progressContainer">
       <div class="progress" id="progressBar"></div>
     </div>
 
-    <button class="button" id="retryButton" style="display: none;">
+    <button class="button" id="retryButton" style="display: none;" aria-label="Voltar ao servidor">
       <span class="arrow">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left">
-          <path d="m12 19-7-7 7-7"></path>
-          <path d="M19 12H5"></path>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 19-7-7 7-7" />
+          <path d="M19 12H5" />
         </svg>
       </span>
       Voltar ao Servidor
     </button>
   </div>
 
-  <!-- Rodapé -->
   <footer>
-    Feito por <strong>7M Vazamentos / Rzw`</strong></strong>
+    Feito por <strong>7M Vazamentos / Rzw`</strong>
   </footer>
 
-  <script type="a44a35afdef6cc15ed575607-text/javascript">
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       const container = document.getElementById("verificationContainer");
       const progressBar = document.getElementById("progressBar");
       const progressText = document.getElementById("progressText");
       const progressContainer = document.getElementById("progressContainer");
       const statusText = document.getElementById("statusText");
-      const errorMessage = document.getElementById("sucessMessage");
+      const successMessage = document.getElementById("successMessage");
       const retryButton = document.getElementById("retryButton");
-      const errorText = document.getElementById("sucessText");
+      const successText = document.getElementById("successText");
 
       let progress = 0;
 
@@ -228,11 +223,11 @@
         if (progress >= 100) {
           clearInterval(interval);
           setTimeout(() => {
-            errorMessage.style.display = "flex";
+            successMessage.style.display = "flex";
             statusText.textContent = "Verificação Sucedida!";
             progressText.style.display = "none";
             progressContainer.style.opacity = "0";
-            errorText.style.display = "block";
+            successText.style.display = "block";
             retryButton.style.display = "inline-flex";
           }, 500);
         }
@@ -240,8 +235,5 @@
     });
   </script>
 
-<script src="js/rocket-loader.min.js" data-cf-settings="a44a35afdef6cc15ed575607-|49" defer=""></script><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon="{" rayid":"94029a81ddf98f37","servertiming":{"name":{"cfextpri":true,"cfl4":true,"cfspeedbrain":true,"cfcachestatus":true}},"version":"2025.4.0-1-g37f21b1","token":"318d05e15f0246efa8397e46589e666e"}"="" crossorigin="anonymous"></script>
-
-
-
-</body></html>
+</body>
+        </html>
